@@ -1,0 +1,2 @@
+# kata
+test technique kata
