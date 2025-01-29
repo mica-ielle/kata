@@ -2,7 +2,7 @@ package com.example.kata;
 
 import com.example.kata.Adapter.Repository.DepositRepository;
 import com.example.kata.Domain.model.Deposit;
-import com.example.kata.Domain.model.Services.BankServices;
+import com.example.kata.Domain.Services.BankServices;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -26,7 +26,7 @@ class KataApplicationTests {
 	@Test
 	void GivenNewDepositWhenSaveThenAccountCredited() {
 		//Given
-		Deposit deposit = new Deposit("AcountNumber","ReceiverName",100,"DepositReason");
+		Deposit deposit = new Deposit(1000);
 
 		//When
 		when(depositRepositoryMock.save(deposit)).thenReturn(deposit);
