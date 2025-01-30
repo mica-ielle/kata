@@ -1,0 +1,40 @@
+package com.example.kata.Domain.Services;
+
+import com.example.kata.Port.dto.CreditRequestDTO;
+import com.example.kata.Domain.model.Amount;
+import com.example.kata.Domain.model.Credit;
+import com.example.kata.Port.input.BankServices;
+import com.example.kata.Port.output.AmountRepository;
+import com.example.kata.Port.output.CreditRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class BankServicesImpl implements BankServices {
+
+    private CreditRepository creditRepository;
+
+    private AmountRepository amountRepository;
+
+
+    public BankServicesImpl(CreditRepository creditRepository, AmountRepository amountRepository) {
+        this.creditRepository = creditRepository;
+        this.amountRepository = amountRepository;
+    }
+
+    //function to manage the money credit process
+    public CreditRequestDTO deposit(Credit credit){
+
+        //registrate credit transaction
+        creditRepository.add(credit);
+        //increase curent amount
+        double amount = amountRepository.currentAmount().getAmount();
+        double na = amount+ credit.getAmount();
+        Amount newAmount = new Amount(na, credit.getDepositDate());
+        amountRepository.add(newAmount);
+
+        //account credit of .. new amount is ..
+        return new CreditRequestDTO(credit.getAmount(),newAmount.getAmount());
+    }
+}
