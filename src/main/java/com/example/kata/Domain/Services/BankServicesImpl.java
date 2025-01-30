@@ -11,8 +11,6 @@ import com.example.kata.Port.output.CreditRepository;
 import com.example.kata.Port.output.DebitRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class BankServicesImpl implements BankServices {
 
@@ -47,17 +45,25 @@ public class BankServicesImpl implements BankServices {
 
     //function to manage the money debit process
     @Override
-    public DebitRequestDTO debit(Debit debit) {
+    public Object debit(Debit debit) {
 
         //registrate debit transaction
         debitRepository.add(debit);
         //decrease curent amount
         double amount = amountRepository.currentAmount().getAmount();
-        double na = amount- debit.getAmount();
-        Amount newAmount = new Amount(na, debit.getDebitDate());
-        amountRepository.add(newAmount);
 
-        //account credit of .. new amount is ..
-        return new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
+        if(debit.getAmount()<amount){
+            double na = amount- debit.getAmount();
+            Amount newAmount = new Amount(na, debit.getDebitDate());
+            amountRepository.add(newAmount);
+
+            //account credit of .. new amount is ..
+            return new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
+        }else {
+            DebitRequestDTO debitException = new DebitRequestDTO(debit.getAmount(),amount);
+            return debitException.setError();
+        }
+
+
     }
 }

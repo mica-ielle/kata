@@ -9,5 +9,5 @@ public interface BankServices {
 
     CreditRequestDTO deposit(Credit credit);
 
-    DebitRequestDTO debit(Debit debit);
+    Object debit(Debit debit);
 }

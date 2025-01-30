@@ -25,4 +25,9 @@ public class DebitRequestDTO {
     public void setCurrentAmount(double currentAmount) {
         this.currentAmount = currentAmount;
     }
+
+
+    public String setError(){
+        return "le montant a retirer "+this.amountDebit+" est superieur au solde de votre compte "+this.currentAmount;
+    }
 }
