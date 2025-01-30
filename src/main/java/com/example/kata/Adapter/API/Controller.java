@@ -31,6 +31,7 @@ public class Controller {
 
         CreditRequestDTO reponse = bankServices.deposit(newCredit);
 
+        logger.info("end of deposit process...");
         return reponse;
     }
 }
