@@ -1,10 +1,12 @@
 package com.example.kata.Domain.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import jakarta.persistence.*;
+import lombok.ToString;
+
 import java.time.LocalDate;
 
+@Entity
+@ToString
 public class Amount {
 
     @Id

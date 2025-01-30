@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -21,11 +21,9 @@ public class AmountRepositoryImpl implements AmountRepository {
 
     private final JpaAmountRepository jpaAmountRepository;
 
-    private final EntityManager entityManager;
 
-    public AmountRepositoryImpl(JpaAmountRepository jpaAmountRepository, EntityManager entityManager) {
+    public AmountRepositoryImpl(JpaAmountRepository jpaAmountRepository) {
         this.jpaAmountRepository = jpaAmountRepository;
-        this.entityManager = entityManager;
     }
 
     @Override
@@ -36,8 +34,12 @@ public class AmountRepositoryImpl implements AmountRepository {
     @Override
     public Amount currentAmount() {
         List<Amount> l = jpaAmountRepository.findAll();
-        int index = l.size();
+        if(l.size()==0){
+            return new Amount(0, LocalDate.now());
+        }else {
+            int index = l.size();
+            return l.get(index-1);
+        }
 
-        return l.get(index);
     }
 }
