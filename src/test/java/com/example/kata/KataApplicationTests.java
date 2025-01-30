@@ -47,9 +47,9 @@ class KataApplicationTests {
 	@Test
 	void GivenAmountWhenRemoveThenAccountDebited() {
 		//Given
-		Debit debit = new Debit(1000);
+		Debit debit = new Debit(100);
 
-		Amount newAmount = new Amount(0, debit.getDebitDate());
+		Amount newAmount = new Amount(1000, debit.getDebitDate());
 
 		DebitRequestDTO debitRequestDTO = new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
 		//When
@@ -58,6 +58,22 @@ class KataApplicationTests {
 
 		//Then
 		assertEquals(debitRequestDTO, response);
+	}
+
+	@Test
+	void GivenAmountWhenRemoveThenAccountAmountNotEnouth() {
+		//Given
+		Debit debit = new Debit(1000);
+
+		Amount newAmount = new Amount(10, debit.getDebitDate());
+
+		DebitRequestDTO debitRequestDTO = new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
+		//When
+		when(bankServicesMock.debit(debit)).thenReturn(debitRequestDTO.setError());
+		Object response = bankServicesMock.debit(debit);
+
+		//Then
+		assertEquals(debitRequestDTO.setError(), response);
 	}
 
 }
