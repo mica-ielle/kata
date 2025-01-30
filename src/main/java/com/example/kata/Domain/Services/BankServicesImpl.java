@@ -88,7 +88,12 @@ public class BankServicesImpl implements BankServices {
     @Override
     public List<Transaction> previousTransactions(int index) {
         List<Transaction> transactionList = transactionRepository.findAll();
+        if (index>transactionList.size()){
+            return transactionList;
+        }else {
+            return transactionList.subList(0,index);
+        }
 
-        return transactionList.subList(0,index);
+
     }
 }
