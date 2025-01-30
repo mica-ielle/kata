@@ -1,8 +1,10 @@
 package com.example.kata;
 
-import com.example.kata.Adapter.Repository.DepositRepository;
-import com.example.kata.Domain.model.Deposit;
-import com.example.kata.Domain.Services.BankServices;
+import com.example.kata.Domain.model.Amount;
+import com.example.kata.Port.dto.CreditRequestDTO;
+import com.example.kata.Port.input.BankServices;
+import com.example.kata.Domain.model.Credit;
+import com.example.kata.Port.output.CreditRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -17,7 +19,7 @@ class KataApplicationTests {
 	@Mock
 	BankServices bankServicesMock;
 	@Mock
-	DepositRepository depositRepositoryMock;
+	CreditRepository creditRepositoryMock;
 
 	@Test
 	void contextLoads() {
@@ -26,14 +28,17 @@ class KataApplicationTests {
 	@Test
 	void GivenNewDepositWhenSaveThenAccountCredited() {
 		//Given
-		Deposit deposit = new Deposit(1000);
+		Credit credit = new Credit(1000);
 
+		Amount newAmount = new Amount(0, credit.getDepositDate());
+
+		CreditRequestDTO creditRequestDTO = new CreditRequestDTO(credit.getAmount(),newAmount.getAmount());
 		//When
-		when(depositRepositoryMock.save(deposit)).thenReturn(deposit);
-		Object response = bankServicesMock.deposit(deposit);
+		when(bankServicesMock.deposit(credit)).thenReturn(creditRequestDTO);
+		Object response = bankServicesMock.deposit(credit);
 
 		//Then
-		assertEquals(deposit, response);
+		assertEquals(creditRequestDTO, response);
 	}
 
 }
