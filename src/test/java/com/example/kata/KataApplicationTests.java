@@ -1,7 +1,9 @@
 package com.example.kata;
 
 import com.example.kata.Domain.model.Amount;
+import com.example.kata.Domain.model.Debit;
 import com.example.kata.Port.dto.CreditRequestDTO;
+import com.example.kata.Port.dto.DebitRequestDTO;
 import com.example.kata.Port.input.BankServices;
 import com.example.kata.Domain.model.Credit;
 import com.example.kata.Port.output.CreditRepository;
@@ -39,6 +41,23 @@ class KataApplicationTests {
 
 		//Then
 		assertEquals(creditRequestDTO, response);
+	}
+
+
+	@Test
+	void GivenAmountWhenRemoveThenAccountDebited() {
+		//Given
+		Debit debit = new Debit(1000);
+
+		Amount newAmount = new Amount(0, debit.getDebitDate());
+
+		DebitRequestDTO debitRequestDTO = new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
+		//When
+		when(bankServicesMock.debit(debit)).thenReturn(debitRequestDTO);
+		Object response = bankServicesMock.debit(debit);
+
+		//Then
+		assertEquals(debitRequestDTO, response);
 	}
 
 }
