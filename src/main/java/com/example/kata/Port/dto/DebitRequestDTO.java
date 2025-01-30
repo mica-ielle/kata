@@ -1,9 +1,12 @@
 package com.example.kata.Port.dto;
 
+import com.example.kata.Domain.model.Amount;
+
 public class DebitRequestDTO {
 
     private double amountDebit;
     private double currentAmount;
+    private boolean debitStatut;
 
     public DebitRequestDTO(double amountDebit, double currentAmount) {
         this.amountDebit = amountDebit;
@@ -26,8 +29,15 @@ public class DebitRequestDTO {
         this.currentAmount = currentAmount;
     }
 
+    public boolean isDebitStatut() {
+        return debitStatut;
+    }
 
-    public String setError(){
-        return "le montant a retirer "+this.amountDebit+" est superieur au solde de votre compte "+this.currentAmount;
+    public void setDebitStatut() {
+        if(amountDebit<currentAmount){
+            this.debitStatut = true;
+        }else {
+            this.debitStatut = false;
+        }
     }
 }

@@ -45,7 +45,7 @@ public class BankServicesImpl implements BankServices {
 
     //function to manage the money debit process
     @Override
-    public Object debit(Debit debit) {
+    public DebitRequestDTO debit(Debit debit) {
 
         //registrate debit transaction
         debitRepository.add(debit);
@@ -57,11 +57,15 @@ public class BankServicesImpl implements BankServices {
             Amount newAmount = new Amount(na, debit.getDebitDate());
             amountRepository.add(newAmount);
 
+            DebitRequestDTO d = new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
+            d.setDebitStatut();
+
             //account credit of .. new amount is ..
-            return new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
+            return d;
         }else {
-            DebitRequestDTO debitException = new DebitRequestDTO(debit.getAmount(),amount);
-            return debitException.setError();
+            DebitRequestDTO d = new DebitRequestDTO(debit.getAmount(),amount);
+            d.setDebitStatut();
+            return d;
         }
 
 

@@ -69,11 +69,11 @@ class KataApplicationTests {
 
 		DebitRequestDTO debitRequestDTO = new DebitRequestDTO(debit.getAmount(),newAmount.getAmount());
 		//When
-		when(bankServicesMock.debit(debit)).thenReturn(debitRequestDTO.setError());
-		Object response = bankServicesMock.debit(debit);
+		when(bankServicesMock.debit(debit)).thenReturn(debitRequestDTO);
+		DebitRequestDTO response = bankServicesMock.debit(debit);
 
 		//Then
-		assertEquals(debitRequestDTO.setError(), response);
+		assertEquals(debitRequestDTO.isDebitStatut(), response.isDebitStatut());
 	}
 
 }

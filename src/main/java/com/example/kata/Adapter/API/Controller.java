@@ -38,10 +38,10 @@ public class Controller {
     }
 
     @PostMapping("/debit")
-    public Object debit(@RequestBody Debit newDebit){
+    public DebitRequestDTO debit(@RequestBody Debit newDebit){
         logger.info("starting debit process...");
 
-        Object reponse = bankServices.debit(newDebit);
+        DebitRequestDTO reponse = bankServices.debit(newDebit);
 
         logger.info("end of debit process...");
         return reponse;
