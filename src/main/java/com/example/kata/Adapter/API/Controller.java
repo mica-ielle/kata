@@ -2,7 +2,9 @@ package com.example.kata.Adapter.API;
 
 import com.example.kata.Domain.model.Credit;
 import com.example.kata.Domain.Services.BankServicesImpl;
+import com.example.kata.Domain.model.Debit;
 import com.example.kata.Port.dto.CreditRequestDTO;
+import com.example.kata.Port.dto.DebitRequestDTO;
 import com.example.kata.Port.input.BankServices;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,16 @@ public class Controller {
         CreditRequestDTO reponse = bankServices.deposit(newCredit);
 
         logger.info("end of deposit process...");
+        return reponse;
+    }
+
+    @PostMapping("/debit")
+    public DebitRequestDTO debit(@RequestBody Debit newDebit){
+        logger.info("starting debit process...");
+
+        DebitRequestDTO reponse = bankServices.debit(newDebit);
+
+        logger.info("end of debit process...");
         return reponse;
     }
 }
