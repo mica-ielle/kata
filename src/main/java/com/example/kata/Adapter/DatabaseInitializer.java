@@ -23,7 +23,7 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     final static Logger logger = LoggerFactory.getLogger(Controller.class);
 
-
+//pour initialiser le solde au lancement
     @Override
     public void run(String... args) throws Exception {
 

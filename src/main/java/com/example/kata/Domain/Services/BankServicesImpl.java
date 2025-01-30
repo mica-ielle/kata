@@ -70,4 +70,9 @@ public class BankServicesImpl implements BankServices {
 
 
     }
+
+    @Override
+    public Amount curentAmount() {
+        return amountRepository.currentAmount();
+    }
 }
