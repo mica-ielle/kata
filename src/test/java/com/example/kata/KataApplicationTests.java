@@ -12,6 +12,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -74,6 +76,19 @@ class KataApplicationTests {
 
 		//Then
 		assertEquals(debitRequestDTO.isDebitStatut(), response.isDebitStatut());
+	}
+
+	@Test
+	void GivenWhenGetCurrentAmountThenCurentAmountReturned() {
+		//Given
+		Amount currentAmount = new Amount(10, LocalDate.now());
+
+		//When
+		when(bankServicesMock.curentAmount()).thenReturn(currentAmount);
+		Amount response = bankServicesMock.curentAmount();
+
+		//Then
+		assertEquals(currentAmount, response);
 	}
 
 }
