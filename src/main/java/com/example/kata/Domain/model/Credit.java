@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 @Entity
 @ToString
-public class Credit {
+public class Credit extends Transaction{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

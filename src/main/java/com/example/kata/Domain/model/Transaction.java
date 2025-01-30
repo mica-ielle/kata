@@ -10,23 +10,22 @@ import java.time.LocalDate;
 
 @Entity
 @ToString
-public class Debit extends Transaction{
+public class Transaction {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private double amount;
-    private LocalDate debitDate;
+    private LocalDate date;
 
-    public Debit() {
+    public Transaction() {
     }
 
-    public Debit(double amount) {
+    public Transaction(double amount) {
         this.amount = amount;
     }
 
-    public Debit(int id, double amount) {
+    public Transaction(int id, double amount) {
         this.id = id;
         this.amount = amount;
     }
@@ -47,11 +46,11 @@ public class Debit extends Transaction{
         this.amount = amount;
     }
 
-    public LocalDate getDebitDate() {
-        return debitDate;
+    public LocalDate getDate() {
+        return date;
     }
 
     public void setDebitDate() {
-        this.debitDate = LocalDate.now();
+        this.date = LocalDate.now();
     }
 }

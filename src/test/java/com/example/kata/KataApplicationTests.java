@@ -2,6 +2,7 @@ package com.example.kata;
 
 import com.example.kata.Domain.model.Amount;
 import com.example.kata.Domain.model.Debit;
+import com.example.kata.Domain.model.Transaction;
 import com.example.kata.Port.dto.CreditRequestDTO;
 import com.example.kata.Port.dto.DebitRequestDTO;
 import com.example.kata.Port.input.BankServices;
@@ -13,6 +14,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
@@ -89,6 +92,26 @@ class KataApplicationTests {
 
 		//Then
 		assertEquals(currentAmount, response);
+	}
+	@Test
+	void GivenWhenGetPreviousTransactionsThenShowPreviousTransactions() {
+		//Given
+		List<Transaction> transactions = new ArrayList<>();
+
+		Transaction trans = new Transaction(200);
+		Debit debit = new Debit(1000);
+		Credit credit = new Credit(1000);
+
+		transactions.add(debit);
+		transactions.add(credit);
+		transactions.add(trans);
+
+		//When
+		when(bankServicesMock.previousTransactions(3)).thenReturn(transactions);
+		List<Transaction> response = bankServicesMock.previousTransactions(3);
+
+		//Then
+		assertEquals(transactions, response);
 	}
 
 }
