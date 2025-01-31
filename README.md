@@ -7,7 +7,6 @@ Pour lancer le projet :
     - Ouvrir le projet dans votre IDE
     - Executer la commande "mvn clean install"
     - run le projet
-    
 
 
 1. function de dépot d'argent
