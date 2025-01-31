@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @ToString
@@ -16,18 +17,21 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double amount;
-    private LocalDate date;
+    private Date date;
+    private String type;
 
     public Transaction() {
     }
 
-    public Transaction(double amount) {
+    public Transaction(double amount, Date date, String type) {
         this.amount = amount;
+        this.date = date;
+        this.type = type;
     }
 
-    public Transaction(int id, double amount) {
-        this.id = id;
+    public Transaction(double amount, Date date) {
         this.amount = amount;
+        this.date = date;
     }
 
     public int getId() {
@@ -46,11 +50,19 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDebitDate() {
-        this.date = LocalDate.now();
+    public void setDate() {
+        this.date = new Date();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

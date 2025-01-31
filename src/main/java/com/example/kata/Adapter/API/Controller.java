@@ -32,6 +32,8 @@ public class Controller {
     public CreditRequestDTO deposit(@RequestBody Credit newCredit){
         logger.info("starting deposit process...");
 
+        newCredit.setDepositDate();
+        newCredit.setDate();
         CreditRequestDTO reponse = bankServices.deposit(newCredit);
 
         logger.info("end of deposit process...");
@@ -42,6 +44,8 @@ public class Controller {
     public DebitRequestDTO debit(@RequestBody Debit newDebit){
         logger.info("starting debit process...");
 
+        newDebit.setDebitDate();
+        newDebit.setDate();
         DebitRequestDTO reponse = bankServices.debit(newDebit);
 
         logger.info("end of debit process...");

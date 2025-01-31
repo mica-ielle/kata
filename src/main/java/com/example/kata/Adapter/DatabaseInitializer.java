@@ -12,6 +12,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Component
@@ -32,7 +33,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             logger.info("initialisation amount");
             Amount amount = new Amount();
             amount.setAmount(0);
-            amount.setDepositDate(LocalDate.now());
+            amount.setDate(new Date());
             Object r = amountRepository.add(amount);
 
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @ToString
@@ -13,20 +14,20 @@ public class Amount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private double amount;
-    private LocalDate depositDate;
+    private Date date;
 
     public Amount() {
     }
 
-    public Amount(double amount, LocalDate depositDate) {
+    public Amount(double amount, Date date) {
         this.amount = amount;
-        this.depositDate = depositDate;
+        this.date = date;
     }
 
-    public Amount(int id, double amount, LocalDate depositDate) {
+    public Amount(int id, double amount, Date date) {
         this.id = id;
         this.amount = amount;
-        this.depositDate = depositDate;
+        this.date = date;
     }
 
     public int getId() {
@@ -45,11 +46,11 @@ public class Amount {
         this.amount = amount;
     }
 
-    public LocalDate getDepositDate() {
-        return depositDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setDepositDate(LocalDate depositDate) {
-        this.depositDate = depositDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -39,7 +39,8 @@ public class BankServicesImpl implements BankServices {
 
         //registrate credit transaction
         creditRepository.add(credit);
-        transactionRepository.add(credit);
+        Transaction transaction = new Transaction(credit.getAmount(),credit.getDepositDate(),"Credit");
+        transactionRepository.add(transaction);
         //increase curent amount
         double amount = amountRepository.currentAmount().getAmount();
         double na = amount+ credit.getAmount();
@@ -57,7 +58,8 @@ public class BankServicesImpl implements BankServices {
 
         //registrate debit transaction
         debitRepository.add(debit);
-        transactionRepository.add(debit);
+        Transaction transaction = new Transaction(debit.getAmount(),debit.getDebitDate(),"Debit");
+        transactionRepository.add(transaction);
         //decrease curent amount
         double amount = amountRepository.currentAmount().getAmount();
 
@@ -80,11 +82,13 @@ public class BankServicesImpl implements BankServices {
 
     }
 
+    //function to get current amount
     @Override
     public Amount curentAmount() {
         return amountRepository.currentAmount();
     }
 
+    //function to get previous Transactions
     @Override
     public List<Transaction> previousTransactions(int index) {
         List<Transaction> transactionList = transactionRepository.findAll();

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @ToString
@@ -14,7 +15,7 @@ public class Credit extends Transaction{
     private int id;
 
     private double amount;
-    private LocalDate depositDate;
+    private Date depositDate;
 
     public Credit() {
     }
@@ -43,11 +44,11 @@ public class Credit extends Transaction{
         this.amount = amount;
     }
 
-    public LocalDate getDepositDate() {
+    public Date getDepositDate() {
         return depositDate;
     }
 
     public void setDepositDate() {
-        this.depositDate = LocalDate.now();
+        this.depositDate = new Date();
     }
 }

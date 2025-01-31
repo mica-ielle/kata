@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @ToString
@@ -17,7 +18,7 @@ public class Debit extends Transaction{
     private int id;
 
     private double amount;
-    private LocalDate debitDate;
+    private Date debitDate;
 
     public Debit() {
     }
@@ -47,11 +48,11 @@ public class Debit extends Transaction{
         this.amount = amount;
     }
 
-    public LocalDate getDebitDate() {
+    public Date getDebitDate() {
         return debitDate;
     }
 
     public void setDebitDate() {
-        this.debitDate = LocalDate.now();
+        this.debitDate = new Date();
     }
 }
