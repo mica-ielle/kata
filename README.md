@@ -1,9 +1,13 @@
 # kata
 test technique kata
 
+L'architecture hexagonale consiste a isoler et rendre la partie domain/processus métié du système
+independante des elements exterieur. Ceci se fait principalement par l'utilisation d'interfaces,
+agissant dans la communication entre le noyau et les autres parties.
 
 Pour lancer le projet :
-    - Cloner le projet sur votre machine
+
+    - Cloner la branche "rc" du projet sur votre machine
     - Ouvrir le projet dans votre IDE
     - Executer la commande "mvn clean install"
     - run le projet
