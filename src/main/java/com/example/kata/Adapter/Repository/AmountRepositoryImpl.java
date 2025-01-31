@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -35,7 +36,7 @@ public class AmountRepositoryImpl implements AmountRepository {
     public Amount currentAmount() {
         List<Amount> l = jpaAmountRepository.findAll();
         if(l.size()==0){
-            return new Amount(0, LocalDate.now());
+            return new Amount(0, new Date());
         }else {
             int index = l.size();
             return l.get(index-1);
