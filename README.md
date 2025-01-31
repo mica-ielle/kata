@@ -28,3 +28,4 @@ Pour lancer le projet :
    "/bankService/previous/{index}",'index' etant le nombre de transaction a afficher avec le port 8080;
    "http://localhost:8080/bankService/previous/3"
    valider
+
