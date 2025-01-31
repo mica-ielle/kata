@@ -1,6 +1,9 @@
 package com.example.kata.Domain.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.ToString;
 
 import java.time.LocalDate;
@@ -8,23 +11,24 @@ import java.util.Date;
 
 @Entity
 @ToString
-public class Credit extends Transaction{
+public class Debit extends Transaction{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private double amount;
-    private Date depositDate;
+    private Date debitDate;
 
-    public Credit() {
+    public Debit() {
     }
 
-    public Credit(int id, double amount) {
-        this.id = id;
+    public Debit(double amount) {
         this.amount = amount;
     }
-    public Credit(double amount) {
+
+    public Debit(int id, double amount) {
+        this.id = id;
         this.amount = amount;
     }
 
@@ -44,11 +48,11 @@ public class Credit extends Transaction{
         this.amount = amount;
     }
 
-    public Date getDepositDate() {
-        return depositDate;
+    public Date getDebitDate() {
+        return debitDate;
     }
 
-    public void setDepositDate() {
-        this.depositDate = new Date();
+    public void setDebitDate() {
+        this.debitDate = new Date();
     }
 }
